@@ -13,10 +13,39 @@
             case 77 /* m */:
                 listMinBin();
                 break;
+            case 83 /* s */:
+                storeInClub();
+                break;
             default:
                 break;
         }
     });
+
+    /**
+     * Stores the current item in your club.
+     */
+    function storeInClub() {
+        if (navigator.language.indexOf('en') !== 0) {
+            alert('The "Send to My Club" shortcut is only available when the app is in English. Blame EA!');
+            return;
+        }
+
+        log('Attempting to store current item in the club...');
+
+        try {
+            // Tap "Send to My Club" button.
+            const detailsPanel = document.getElementsByClassName('DetailPanel')[0];
+            const detailsPanelButtons = detailsPanel.getElementsByTagName('button');
+            const buttonArray = Array.from(detailsPanelButtons);
+            const sendToMyClubButton = buttonArray.filter((button) => button.innerText.indexOf('Send to My Club') > -1)[0];
+            tapElement(sendToMyClubButton);
+        } catch (error) {
+            log('Unable to locate "Send to My Club" button.', true /* isError */);
+            return;
+        }
+
+        log('Successfully stored current item in the club.');
+    }
 
     /**
      * Lists the current item with a BIN price of 200.
@@ -39,10 +68,12 @@
             log('Unable to list current item for minimum BIN.', true /* isError */);
             return;
         }
+
+        log('Successfully listed current item for minimum BIN.');
     }
 
     /**
-     * Handler to invoke "Compare Price" button.
+     * Search for the current item to see what other ones on the market are going for.
      */
     function comparePrice() {
         log('Attempting to search for current item to compare price...');
@@ -58,7 +89,7 @@
             return;
         }
 
-        log('Successfully searched for current item.')
+        log('Successfully searched for current item.');
     }
 
     /**
