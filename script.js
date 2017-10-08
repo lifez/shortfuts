@@ -106,7 +106,7 @@
      */
     function sendTouchEvent(element, eventType) {
         const touchObj = new Touch({
-          identifier: 123,
+          identifier: 'Keyboard shortcuts should be supported natively without an extension!',
           target: element,
           clientX: 0,
           clientY: 0,
