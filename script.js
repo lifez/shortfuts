@@ -7,8 +7,11 @@
         const keyCode = ev.keyCode;
 
         switch (keyCode) {
-            case 67:
+            case 67 /* c */:
                 comparePrice();
+                break;
+            case 77 /* m */:
+                listMinBin();
                 break;
             default:
                 break;
@@ -16,14 +19,37 @@
     });
 
     /**
+     * Lists the current item with a BIN price of 200.
+     */
+    function listMinBin() {
+        log('Attempting to list current item for minimum BIN...');
+
+        try {
+            // Set BIN price to 200.
+            const quickListPanelActions = getQuickListPanelActions();
+            const binAction = quickListPanelActions.getElementsByClassName('panelActionRow')[2];
+            const binActionInput = binAction.getElementsByTagName('input')[0];
+            binActionInput.value = 200;
+
+            // Tap "List Item" button.
+            const buttons = quickListPanelActions.getElementsByTagName('button');
+            const listItemButton = buttons[buttons.length - 2];
+            tapElement(listItemButton);
+        } catch (error) {
+            log('Unable to list current item for minimum BIN.', true /* isError */);
+            return;
+        }
+    }
+
+    /**
      * Handler to invoke "Compare Price" button.
      */
     function comparePrice() {
-        log('Attempting to search for currently selected item to compare price...');
+        log('Attempting to search for current item to compare price...');
 
         try {
-            const quickListPanel = document.getElementsByClassName('QuickListPanel')[0];
-            const quickListPanelActions = quickListPanel.getElementsByClassName('panelActions')[0];
+            // Tap "Compare Price" button.
+            const quickListPanelActions = getQuickListPanelActions();
             const buttons = quickListPanelActions.getElementsByTagName('button');
             const comparePriceButton = buttons[buttons.length - 1];
             tapElement(comparePriceButton);
@@ -32,7 +58,16 @@
             return;
         }
 
-        log('Successfully searched for currently selected item.')
+        log('Successfully searched for current item.')
+    }
+
+    /**
+     * Gets the quick list panel actions div.
+     */
+    function getQuickListPanelActions() {
+        const quickListPanel = document.getElementsByClassName('QuickListPanel')[0];
+        const quickListPanelActions = quickListPanel.getElementsByClassName('panelActions')[0];
+        return quickListPanelActions;
     }
 
     /**
