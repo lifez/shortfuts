@@ -11,7 +11,7 @@
     "version": "1.0",
     "content_scripts": [
         {
-            "matches": ["https://www.easports.com/fifa/ultimate-team/web-app/*", "http://www.easports.com/fifa/ultimate-team/web-app/*"],
+            "matches": ["https://www.easports.com/*fifa/ultimate-team/web-app/*", "http://www.easports.com/*fifa/ultimate-team/web-app/*"],
             "js": ["script.js"]
         }
     ],
