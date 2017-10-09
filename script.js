@@ -67,6 +67,17 @@
      * Goes back.
      */
     function goBack() {
+        /**
+         * Extra check for English language to only allow back button shortcut
+         * on the "Search Results" page.
+         */
+        if (navigator.language.indexOf('en-') > -1) {
+            const pageTitle = document.getElementById('futHeaderTitle');
+            if (pageTitle.innerText.toLowerCase().indexOf('search') === -1) {
+                return;
+            }
+        }
+
         log('Attempting to go to the previous page...');
 
         try {
