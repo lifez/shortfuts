@@ -28,10 +28,40 @@
             case 8 /* backspace */:
                 goBack();
                 break;
+            case 66 /* b */:
+                buyBronzePack();
+                break;
             default:
                 break;
         }
     });
+
+    /**
+     * Buys a regular bronze pack.
+     */
+    function buyBronzePack() {
+        log('Attempting to buy a bronze pack...');
+
+        try {
+            const bronzeTabButton = document.getElementsByClassName('TabMenuItem')[2];
+            tapElement(bronzeTabButton);
+
+            setTimeout(() => {
+                const bronzePackButton = document.getElementsByClassName('currency call-to-action cCoins')[0];
+                tapElement(bronzePackButton);
+
+                setTimeout(() => {
+                    const okButton = document.getElementsByClassName('Dialog')[0].getElementsByClassName('btn-flat')[1];
+                    tapElement(okButton);
+                }, 50);
+            }, 200);
+        } catch (error) {
+            log('Unable to buy a bronze pack.', true /* isError */);
+            return;
+        }
+
+        log('Successfully bought a bronze pack.');
+    }
 
     /**
      * Goes back.
