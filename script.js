@@ -25,30 +25,62 @@
             case 38 /* up arrow */:
                 move(ev);
                 break;
+            case 8 /* backspace */:
+                goBack();
+                break;
             default:
                 break;
         }
     });
 
-    function move(ev) {
-        const isDown = ev.keyCode === 40;
+    /**
+     * Goes back.
+     */
+    function goBack() {
+        log('Attempting to go to the previous page...');
 
-        // Get all items.
-        const itemList = document.getElementsByClassName('itemList')[0];
-        const items = Array.from(itemList.getElementsByClassName('listFUTItem'));
-
-        // Get current index.
-        let currentIndex = items.findIndex((item) => { return item.className.indexOf('selected') > -1; })
-
-        if (isDown && currentIndex + 1 <= items.length) {
-            const div = items[++currentIndex].getElementsByClassName('has-tap-callback')[0];
-            tapElement(div);
-        } else if (!isDown && currentIndex - 1 >= 0) {
-            const div = items[--currentIndex].getElementsByClassName('has-tap-callback')[0];
-            tapElement(div);
+        try {
+            const backButton = document.getElementsByClassName('btn-flat back headerButton')[0];
+            tapElement(backButton);
+        } catch (error) {
+            log('Unable to go back.', true /* isError */);
+            return;
         }
 
-        const x = true;
+        log('Successfully went back.');
+    }
+
+    /**
+     * Adds item selection to the list.
+     *
+     * @param {Event} ev
+     */
+    function move(ev) {
+        log('Attempting to change the currently selected item...');
+
+        try {
+            const isDown = ev.keyCode === 40;
+
+            // Get all items.
+            const itemList = document.getElementsByClassName('itemList')[0];
+            const items = Array.from(itemList.getElementsByClassName('listFUTItem'));
+
+            // Get current index.
+            let currentIndex = items.findIndex((item) => { return item.className.indexOf('selected') > -1; })
+
+            if (isDown && currentIndex + 1 <= items.length) {
+                const div = items[++currentIndex].getElementsByClassName('has-tap-callback')[0];
+                tapElement(div);
+            } else if (!isDown && currentIndex - 1 >= 0) {
+                const div = items[--currentIndex].getElementsByClassName('has-tap-callback')[0];
+                tapElement(div);
+            }
+        } catch (error) {
+            log('Unable to change the currently selected item...', true /* isError */);
+            return;
+        }
+
+        log('Successfully changed the currently selected item.');
     }
 
     /**
