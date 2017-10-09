@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "shortfuts",
-    "description": "Chrome extension to expose keyboard shortcuts for FIFA 18 FUT web app.",
+    "description": "Exposes keyboard shortcuts for FIFA 18 FUT web app",
     "version": "1.0",
     "content_scripts": [
         {
