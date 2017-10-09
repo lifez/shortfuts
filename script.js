@@ -16,10 +16,32 @@
             case 83 /* s */:
                 storeInClub();
                 break;
+            case 81 /* q */:
+                quickSell();
+                break;
             default:
                 break;
         }
     });
+
+    /**
+     * Quick sells the current item.
+     */
+    function quickSell() {
+        log('Attempting to quick sell the current item...');
+
+        try {
+            // Tap "Quick Sell" button.
+            const buttonArray = getDetailsPanelButtons();
+            const quickSellButton = buttonArray[buttonArray.length - 1];
+            tapElement(quickSellButton);
+        } catch (error) {
+            log('Unable to locate "Quick Sell" button.', true /* isError */);
+            return;
+        }
+
+        log('Successfully quick sold the current item.');
+    }
 
     /**
      * Stores the current item in your club.
@@ -34,9 +56,7 @@
 
         try {
             // Tap "Send to My Club" button.
-            const detailsPanel = document.getElementsByClassName('DetailPanel')[0];
-            const detailsPanelButtons = detailsPanel.getElementsByTagName('button');
-            const buttonArray = Array.from(detailsPanelButtons);
+            const buttonArray = getDetailsPanelButtons();
             const sendToMyClubButton = buttonArray.filter((button) => button.innerText.indexOf('Send to My Club') > -1)[0];
             tapElement(sendToMyClubButton);
         } catch (error) {
@@ -99,6 +119,16 @@
         const quickListPanel = document.getElementsByClassName('QuickListPanel')[0];
         const quickListPanelActions = quickListPanel.getElementsByClassName('panelActions')[0];
         return quickListPanelActions;
+    }
+
+    /**
+     * Gets the buttons in the details panel and returns them as an array.
+     */
+    function getDetailsPanelButtons() {
+        const detailsPanel = document.getElementsByClassName('DetailPanel')[0];
+        const detailsPanelButtons = detailsPanel.getElementsByTagName('button');
+        const buttonArray = Array.from(detailsPanelButtons);
+        return buttonArray;
     }
 
     /**
