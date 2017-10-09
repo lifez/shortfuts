@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "shortfuts",
-    "description": "Exposes keyboard shortcuts for FIFA 18 FUT web app. Please visit the \"Developer website\" link below for the list of currently implemented shortcuts.",
+    "description": "Exposes keyboard shortcuts for FIFA 18 FUT web app. Please visit the \"Developer website\" link for the list of shortcuts.",
     "homepage_url": "https://github.com/martellaj/shortfuts",
     "icons": {
         "16": "icon.png",
