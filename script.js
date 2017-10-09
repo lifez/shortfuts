@@ -19,10 +19,37 @@
             case 81 /* q */:
                 quickSell();
                 break;
+            case 40 /* down arrow */:
+                move(ev);
+                break;
+            case 38 /* up arrow */:
+                move(ev);
+                break;
             default:
                 break;
         }
     });
+
+    function move(ev) {
+        const isDown = ev.keyCode === 40;
+
+        // Get all items.
+        const itemList = document.getElementsByClassName('itemList')[0];
+        const items = Array.from(itemList.getElementsByClassName('listFUTItem'));
+
+        // Get current index.
+        let currentIndex = items.findIndex((item) => { return item.className.indexOf('selected') > -1; })
+
+        if (isDown && currentIndex + 1 <= items.length) {
+            const div = items[++currentIndex].getElementsByClassName('has-tap-callback')[0];
+            tapElement(div);
+        } else if (!isDown && currentIndex - 1 >= 0) {
+            const div = items[--currentIndex].getElementsByClassName('has-tap-callback')[0];
+            tapElement(div);
+        }
+
+        const x = true;
+    }
 
     /**
      * Quick sells the current item.
