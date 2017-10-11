@@ -17,8 +17,11 @@
                 if (ev.altKey) {
                     storeAllInClub();
                 } else {
-                    storeInClub();
+                    pressDetailsPanelButton('Send to My Club');
                 }
+                break;
+            case 84 /* t */:
+                pressDetailsPanelButton('Send to Transfer List');
                 break;
             case 81 /* q */:
                 quickSell();
@@ -152,27 +155,32 @@
     }
 
     /**
-     * Stores the current item in your club.
+     * Presses a button in the item details panel, based on a given button label.
      */
-    function storeInClub() {
+    function pressDetailsPanelButton(buttonLabel) {
         if (navigator.language.indexOf('en') !== 0) {
-            alert('The "Send to My Club" shortcut is only available when the app is in English. Blame EA!');
+            alert(`The "${buttonLabel}" shortcut is only available when the app is in English. Blame EA!`);
             return;
         }
 
-        log('Attempting to store current item in the club...');
+        if (typeof buttonLabel !== 'string') {
+            log('pressDetailsButton function failed: invalid button label parameter');
+            return;
+        }
+
+        log(`Attempting to press "${buttonLabel}" button...`);
 
         try {
-            // Tap "Send to My Club" button.
+            // Tap the relevant button.
             const buttonArray = getDetailsPanelButtons();
-            const sendToMyClubButton = buttonArray.filter((button) => button.innerText.indexOf('Send to My Club') > -1)[0];
-            tapElement(sendToMyClubButton);
+            const button = buttonArray.filter((button) => button.innerText.indexOf(buttonLabel) > -1)[0];
+            tapElement(button);
         } catch (error) {
-            log('Unable to locate "Send to My Club" button.', true /* isError */);
+            log(`Unable to locate the "${buttonLabel}" button`, true /* isError */);
             return;
         }
 
-        log('Successfully stored current item in the club.');
+        log(`Successfully pressed "${buttonLabel}" button.`);
     }
 
     /**
