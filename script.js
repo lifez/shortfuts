@@ -14,7 +14,11 @@
                 listMinBin();
                 break;
             case 83 /* s */:
-                storeInClub();
+                if (ev.altKey) {
+                    storeAllInClub();
+                } else {
+                    storeInClub();
+                }
                 break;
             case 81 /* q */:
                 quickSell();
@@ -172,6 +176,29 @@
     }
 
     /**
+     * Stores all remaining items in the club.
+     */
+    function storeAllInClub() {
+        log('Attempting to store remaining items in the club...');
+        let prevItemCount = 0;
+
+        try {
+            const itemList = document.getElementsByClassName('itemList')[0];
+            const items = Array.from(itemList.getElementsByClassName('listFUTItem'));
+
+            items.forEach(function(item, itemIndex) {
+                setTimeout(() => {
+                    storeInClub();
+                }, itemIndex * getRandomLongerWait());
+            }, this);
+        } catch (error) {
+            log('Unable to store remaining items in club.', true /* isError */);
+        }
+
+        log('Successfully stored remaining items in club.');
+    }
+
+    /**
      * Lists the current item with a BIN price of 200.
      */
     function listMinBin() {
@@ -264,6 +291,10 @@
 
     function getRandomWait() {
         return Math.floor(Math.random() * (300 - 150)) + 150;
+    }
+
+    function getRandomLongerWait() {
+        return Math.floor(Math.random() * (2000 - 1000)) + 1000;
     }
 
     /**
