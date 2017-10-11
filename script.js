@@ -53,7 +53,7 @@
                 setTimeout(() => {
                     const okButton = document.getElementsByClassName('Dialog')[0].getElementsByClassName('btn-flat')[1];
                     tapElement(okButton);
-                }, 50);
+                }, getRandomWait());
             }, 200);
         } catch (error) {
             log('Unable to buy a bronze pack.', true /* isError */);
@@ -134,6 +134,11 @@
             const buttonArray = getDetailsPanelButtons();
             const quickSellButton = buttonArray[buttonArray.length - 1];
             tapElement(quickSellButton);
+
+            setTimeout(() => {
+                const okButton = document.getElementsByClassName('Dialog')[0].getElementsByClassName('btn-flat')[1];
+                tapElement(okButton);
+            }, getRandomWait());
         } catch (error) {
             log('Unable to locate "Quick Sell" button.', true /* isError */);
             return;
@@ -257,6 +262,10 @@
         sendTouchEvent(element, 'touchend');
     }
 
+    function getRandomWait() {
+        return Math.floor(Math.random() * (300 - 150)) + 150;
+    }
+
     /**
      * Dispatches a touch event on the element.
      * https://stackoverflow.com/a/42447620
@@ -287,4 +296,4 @@
 
         element.dispatchEvent(touchEvent);
       }
-})();
+    })();
