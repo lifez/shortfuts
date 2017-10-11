@@ -71,11 +71,10 @@
          * Extra check for English language to only allow back button shortcut
          * on the "Search Results" page.
          */
-        if (navigator.language.indexOf('en-') > -1) {
-            const pageTitle = document.getElementById('futHeaderTitle');
-            if (pageTitle.innerText.toLowerCase().indexOf('search') === -1) {
-                return;
-            }
+        const pageTitle = document.getElementById('futHeaderTitle');
+        if (document.getElementsByClassName('SearchResults').length === 0) {
+            log('Not going back because we\'re not on the search results page.');
+            return;
         }
 
         log('Attempting to go to the previous page...');
