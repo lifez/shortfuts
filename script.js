@@ -314,25 +314,25 @@
      */
     function sendTouchEvent(element, eventType) {
         const touchObj = new Touch({
-          identifier: 'Keyboard shortcuts should be supported natively without an extension!',
-          target: element,
-          clientX: 0,
-          clientY: 0,
-          radiusX: 2.5,
-          radiusY: 2.5,
-          rotationAngle: 10,
-          force: 0.5
+            identifier: 'Keyboard shortcuts should be supported natively without an extension!',
+            target: element,
+            clientX: 0,
+            clientY: 0,
+            radiusX: 2.5,
+            radiusY: 2.5,
+            rotationAngle: 10,
+            force: 0.5
         });
 
         const touchEvent = new TouchEvent(eventType, {
-          cancelable: true,
-          bubbles: true,
-          touches: [touchObj],
-          targetTouches: [touchObj],
-          changedTouches: [touchObj],
-          shiftKey: true
+            cancelable: true,
+            bubbles: true,
+            touches: [touchObj],
+            targetTouches: [touchObj],
+            changedTouches: [touchObj],
+            shiftKey: true
         });
 
         element.dispatchEvent(touchEvent);
-      }
-    })();
+    }
+})();
