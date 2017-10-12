@@ -50,6 +50,13 @@
         log('Attempting to buy a bronze pack...');
 
         try {
+            // Only execute this shortcut if in the "Store" tab.
+            const storeHub = document.getElementById('StoreHub');
+            if (!storeHub) {
+                log('Not on store page, so not trying to buy a pack.', true /* isError */);
+                return;
+            }
+
             const bronzeTabButton = document.getElementsByClassName('TabMenuItem')[2];
             tapElement(bronzeTabButton);
 
