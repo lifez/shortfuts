@@ -176,7 +176,7 @@
             const button = buttonArray.filter((button) => button.innerText.indexOf(buttonLabel) > -1)[0];
             tapElement(button);
         } catch (error) {
-            log(`Unable to locate the "${buttonLabel}" button`, true /* isError */);
+            log(`Unable to locate the "${buttonLabel}" button.`, true /* isError */);
             return;
         }
 
