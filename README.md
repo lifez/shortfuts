@@ -12,7 +12,7 @@
 * **m** - Lists the selected item for min BIN (200 tokens).
 * **s** - Stores the current item into your club.
 * **t** - Places the current item on your transfer list.
-* **q** - Quick sells the current item (requires an "ENTER" confirmation key).
+* **q** - Quick sells the current item.
 * **up/down arrow keys** - This allows you to traverse the items in your pack with the keyboard.
 * **b** - Buys a regular bronze pack (400 tokens).
 
