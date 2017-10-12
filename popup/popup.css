@@ -1,0 +1,52 @@
+body {
+    width: 320px;
+}
+
+*:focus {
+    outline: none;
+    border: none;
+}
+
+.shortfuts-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#shortcut-list {
+    margin-top: 4px;
+    padding-left: 24px;
+}
+
+.shortfuts-hr {
+    margin: 12px 0px;
+}
+
+.shortfuts-btn {
+    background: #1a1748;
+    background-image: -webkit-linear-gradient(top, #1a1748, #201c55);
+    background-image: -moz-linear-gradient(top, #1a1748, #201c55);
+    background-image: -ms-linear-gradient(top, #1a1748, #201c55);
+    background-image: -o-linear-gradient(top, #1a1748, #201c55);
+    background-image: linear-gradient(to bottom, #1a1748, #201c55);
+    -webkit-border-radius: 3;
+    -moz-border-radius: 3;
+    border-radius: 3px;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    font-family: SegoeUI,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    text-transform: capitalize;
+}
+
+.shortfuts-btn:hover {
+    background: #e0216c;
+    text-decoration: none;
+}
+
+.shortfuts-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
