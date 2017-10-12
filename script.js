@@ -78,7 +78,6 @@
          * Extra check for English language to only allow back button shortcut
          * on the "Search Results" page.
          */
-        const pageTitle = document.getElementById('futHeaderTitle');
         if (document.getElementsByClassName('SearchResults').length === 0) {
             log('Not going back because we\'re not on the search results page.');
             return;
