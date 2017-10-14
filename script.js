@@ -38,6 +38,9 @@
             case 66 /* b */:
                 buyBronzePack();
                 break;
+            case 220 /* \ */:
+                buyNow();
+                break;
             default:
                 break;
         }
@@ -195,6 +198,27 @@
         log(`Successfully pressed "${buttonLabel}" button.`);
     }
 
+
+    /**
+     * Search for the current item to see what other ones on the market are going for.
+     */
+    function buyNow() {
+        log('Attempting to buy now this item...');
+        if (document.getElementsByClassName('SearchResults').length === 0) {
+            log('Not buy because we\'re not on the search results page.');
+            return;
+        }
+        try {
+            // Tap "Buy Now" button.
+            const buyNowButton = getBuyNowButton()
+            tapElement(buyNowButton);
+        } catch (error) {
+            log('Unable to locate "Buy Now" button.', true /* isError */);
+            return;
+        }
+
+        log('Successfully buy this card.');
+    }
 
     /**
      * Stores all remaining items in the club.
