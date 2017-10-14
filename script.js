@@ -97,6 +97,7 @@
             const backButton = document.getElementsByClassName('btn-flat back headerButton')[0];
             tapElement(backButton);
         } catch (error) {
+            log(error, true /* isError */);
             log('Unable to go back.', true /* isError */);
             return;
         }
@@ -165,11 +166,6 @@
     function pressDetailsPanelButton(buttonLabel) {
         if (navigator.language.indexOf('en') !== 0) {
             alert(`The "${buttonLabel}" shortcut is only available when the app is in English. Blame EA!`);
-            return;
-        }
-
-        if (typeof buttonLabel !== 'string') {
-            log('pressDetailsButton function failed: invalid button label parameter');
             return;
         }
 
@@ -302,9 +298,8 @@
     }
 
     /**
-     * Gets Buy Now button in the search page.
+     * Gets "Buy Now" button.
      */
-
     function getBuyNowButton() {
         const buyNowButton = document.getElementsByClassName('list')[1];
         return buyNowButton;
@@ -377,7 +372,7 @@
     }
 
     /**
-     * Presses
+     * Presses "OK" button in confirmation dialog.
      */
     function confirmDialog() {
         setTimeout(() => {
