@@ -312,8 +312,12 @@
         return buyNowButton;
     }
 
+    /**
+     * Determiens if user is currently on the "Search Results" page.
+     */
     function isSearchResultPage(){
-        return document.getElementById('futHeaderTitle').innerHTML == 'Search Results'
+        const title = document.getElementById('futHeaderTitle');
+        return title && title.innerHTML == 'Search Results';
     }
 
     /**
