@@ -15,5 +15,6 @@
 * **q** - Quick sells the current item.
 * **up/down arrow keys** - This allows you to traverse the items in your pack with the keyboard.
 * **b** - Buys a regular bronze pack (400 tokens).
+* **\\** - Executes "Buy Now" on the selected on "Search Results" page.
 
 

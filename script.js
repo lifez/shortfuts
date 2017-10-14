@@ -189,17 +189,19 @@
     }
 
     /**
-     * Search for the current item to see what other ones on the market are going for.
+     * Executes "Buy Now" on the selected on "Search Results" page.
      */
     function buyNow() {
-        log('Attempting to buy now this item...');
+        log('Attempting to "Buy Now" currently selected item...');
+
         if (document.getElementsByClassName('SearchResults').length === 0) {
-            log('Not buy because we\'re not on the search results page.');
+            log(`Not exeucting "Buy Now" because we're not on the "Search Results" page.`, true /* isError */);
             return;
         }
+
         try {
             // Tap "Buy Now" button.
-            const buyNowButton = getBuyNowButton()
+            const buyNowButton = getBuyNowButton();
             tapElement(buyNowButton);
 
             // Press OK.
@@ -209,7 +211,7 @@
             return;
         }
 
-        log('Successfully buy this card.');
+        log('Successfully executed "Buy Now" on selected item.');
     }
 
     /**
@@ -288,7 +290,6 @@
         const quickListPanelActions = quickListPanel.getElementsByClassName('panelActions')[0];
         return quickListPanelActions;
     }
-
 
     /**
      * Gets the buttons in the details panel and returns them as an array.
