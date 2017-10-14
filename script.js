@@ -70,10 +70,8 @@
                 const bronzePackButton = document.getElementsByClassName('currency call-to-action cCoins')[0];
                 tapElement(bronzePackButton);
 
-                setTimeout(() => {
-                    const okButton = document.getElementsByClassName('Dialog')[0].getElementsByClassName('btn-flat')[1];
-                    tapElement(okButton);
-                }, getRandomWait());
+                // Press OK.
+                confirmDialog();
             }, 200);
         } catch (error) {
             log('Unable to buy a bronze pack.', true /* isError */);
@@ -102,6 +100,7 @@
             const backButton = document.getElementsByClassName('btn-flat back headerButton')[0];
             tapElement(backButton);
         } catch (error) {
+            log(error, true /* isError */);
             log('Unable to go back.', true /* isError */);
             return;
         }
@@ -121,7 +120,12 @@
             const isDown = ev.keyCode === 40;
 
             // Get all items.
-            const itemList = document.getElementsByClassName('itemList')[0];
+            let itemList;
+            if (isSearchResultPage()) {
+                itemList = document.getElementsByClassName('paginated-item-list')[0];
+            } else {
+                itemList = document.getElementsByClassName('itemList')[0];
+            }
             const items = Array.from(itemList.getElementsByClassName('listFUTItem'));
 
             // Get current index.
@@ -135,6 +139,7 @@
                 tapElement(div);
             }
         } catch (error) {
+            log(error);
             log('Unable to change the currently selected item...', true /* isError */);
             return;
         }
@@ -154,10 +159,8 @@
             const quickSellButton = buttonArray[buttonArray.length - 1];
             tapElement(quickSellButton);
 
-            setTimeout(() => {
-                const okButton = document.getElementsByClassName('Dialog')[0].getElementsByClassName('btn-flat')[1];
-                tapElement(okButton);
-            }, getRandomWait());
+            // Press OK.
+            confirmDialog();
         } catch (error) {
             log('Unable to locate "Quick Sell" button.', true /* isError */);
             return;
@@ -172,11 +175,6 @@
     function pressDetailsPanelButton(buttonLabel) {
         if (navigator.language.indexOf('en') !== 0) {
             alert(`The "${buttonLabel}" shortcut is only available when the app is in English. Blame EA!`);
-            return;
-        }
-
-        if (typeof buttonLabel !== 'string') {
-            log('pressDetailsButton function failed: invalid button label parameter');
             return;
         }
 
@@ -195,25 +193,31 @@
         log(`Successfully pressed "${buttonLabel}" button.`);
     }
 
+
     /**
-     * Search for the current item to see what other ones on the market are going for.
+     * Executes "Buy Now" on the selected on "Search Results" page.
      */
     function buyNow() {
-        log('Attempting to buy now this item...');
+        log('Attempting to "Buy Now" currently selected item...');
+
         if (document.getElementsByClassName('SearchResults').length === 0) {
-            log('Not buy because we\'re not on the search results page.');
+            log(`Not exeucting "Buy Now" because we're not on the "Search Results" page.`, true /* isError */);
             return;
         }
+
         try {
             // Tap "Buy Now" button.
-            const buyNowButton = getBuyNowButton()
+            const buyNowButton = getBuyNowButton();
             tapElement(buyNowButton);
+
+            // Press OK.
+            confirmDialog();
         } catch (error) {
             log('Unable to locate "Buy Now" button.', true /* isError */);
             return;
         }
 
-        log('Successfully buy this card.');
+        log('Successfully executed "Buy Now" on selected item.');
     }
 
 
@@ -315,7 +319,6 @@
         return quickListPanelActions;
     }
 
-
     /**
      * Gets the buttons in the details panel and returns them as an array.
      */
@@ -327,12 +330,15 @@
     }
 
     /**
-     * Gets Buy Now button in the search page.
+     * Gets "Buy Now" button.
      */
-
     function getBuyNowButton() {
         const buyNowButton = document.getElementsByClassName('list')[1];
         return buyNowButton;
+    }
+
+    function isSearchResultPage(){
+        return document.getElementById('futHeaderTitle').innerHTML == 'Search Results'
     }
 
     /**
@@ -399,5 +405,19 @@
         });
 
         element.dispatchEvent(touchEvent);
+    }
+
+    /**
+     * Presses "OK" button in confirmation dialog.
+     */
+    function confirmDialog() {
+        setTimeout(() => {
+            try{
+                const okButton = document.getElementsByClassName('Dialog')[0].getElementsByClassName('btn-flat')[1];
+                tapElement(okButton);
+            } catch (error) {
+                log(error, true /* isError */);
+            }
+        }, getRandomWait());
     }
 })();
