@@ -41,6 +41,9 @@
             case 220 /* \ */:
                 buyNow();
                 break;
+            case 87 /* w */:
+                watchItem();
+                break;
             default:
                 break;
         }
@@ -217,6 +220,28 @@
         log('Successfully executed "Buy Now" on selected item.');
     }
 
+
+    /**
+     * Watch for the current item.
+     */
+    function watchItem() {
+        log('Attempting to watch this item...');
+        if (document.getElementsByClassName('SearchResults').length === 0) {
+            log('Not watch because we\'re not on the search results page.');
+            return;
+        }
+        try {
+            // Tap "Watch" button.
+            const watchButton = document.getElementsByClassName('watch')[0]
+            tapElement(watchButton);
+        } catch (error) {
+            log('Unable to locate "Watch" button.', true /* isError */);
+            return;
+        }
+
+        log('Successfully watch this card.');
+    }
+  
     /**
      * Stores all remaining items in the club.
      */
