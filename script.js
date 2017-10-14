@@ -67,10 +67,8 @@
                 const bronzePackButton = document.getElementsByClassName('currency call-to-action cCoins')[0];
                 tapElement(bronzePackButton);
 
-                setTimeout(() => {
-                    const okButton = document.getElementsByClassName('Dialog')[0].getElementsByClassName('btn-flat')[1];
-                    tapElement(okButton);
-                }, getRandomWait());
+                // Press OK.
+                confirmDialog();
             }, 200);
         } catch (error) {
             log('Unable to buy a bronze pack.', true /* isError */);
@@ -151,10 +149,8 @@
             const quickSellButton = buttonArray[buttonArray.length - 1];
             tapElement(quickSellButton);
 
-            setTimeout(() => {
-                const okButton = document.getElementsByClassName('Dialog')[0].getElementsByClassName('btn-flat')[1];
-                tapElement(okButton);
-            }, getRandomWait());
+            // Press OK.
+            confirmDialog();
         } catch (error) {
             log('Unable to locate "Quick Sell" button.', true /* isError */);
             return;
@@ -205,6 +201,9 @@
             // Tap "Buy Now" button.
             const buyNowButton = getBuyNowButton()
             tapElement(buyNowButton);
+
+            // Press OK.
+            confirmDialog();
         } catch (error) {
             log('Unable to locate "Buy Now" button.', true /* isError */);
             return;
@@ -374,5 +373,19 @@
         });
 
         element.dispatchEvent(touchEvent);
+    }
+
+    /**
+     * Presses
+     */
+    function confirmDialog() {
+        setTimeout(() => {
+            try{
+                const okButton = document.getElementsByClassName('Dialog')[0].getElementsByClassName('btn-flat')[1];
+                tapElement(okButton);
+            } catch (error) {
+                log(error, true /* isError */);
+            }
+        }, getRandomWait());
     }
 })();
