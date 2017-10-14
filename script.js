@@ -197,7 +197,10 @@
      */
     function buyNow() {
         log('Attempting to buy now this item...');
-
+        if (document.getElementsByClassName('SearchResults').length === 0) {
+            log('Not buy because we\'re not on the search results page.');
+            return;
+        }
         try {
             // Tap "Buy Now" button.
             const buyNowButton = getBuyNowButton()
@@ -286,6 +289,7 @@
         const quickListPanelActions = quickListPanel.getElementsByClassName('panelActions')[0];
         return quickListPanelActions;
     }
+
 
     /**
      * Gets the buttons in the details panel and returns them as an array.
