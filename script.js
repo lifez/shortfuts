@@ -117,7 +117,12 @@
             const isDown = ev.keyCode === 40;
 
             // Get all items.
-            const itemList = document.getElementsByClassName('itemList')[0];
+            let itemList;
+            if (isSearchResultPage()) {
+                itemList = document.getElementsByClassName('paginated-item-list')[0];
+            } else {
+                itemList = document.getElementsByClassName('itemList')[0];
+            }
             const items = Array.from(itemList.getElementsByClassName('listFUTItem'));
 
             // Get current index.
@@ -131,6 +136,7 @@
                 tapElement(div);
             }
         } catch (error) {
+            log(error);
             log('Unable to change the currently selected item...', true /* isError */);
             return;
         }
@@ -183,6 +189,7 @@
 
         log(`Successfully pressed "${buttonLabel}" button.`);
     }
+
 
     /**
      * Executes "Buy Now" on the selected on "Search Results" page.
@@ -303,6 +310,10 @@
     function getBuyNowButton() {
         const buyNowButton = document.getElementsByClassName('list')[1];
         return buyNowButton;
+    }
+
+    function isSearchResultPage(){
+        return document.getElementById('futHeaderTitle').innerHTML == 'Search Results'
     }
 
     /**
