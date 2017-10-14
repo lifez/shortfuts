@@ -237,7 +237,7 @@
 
         log('Successfully watch this card.');
     }
-
+  
     /**
      * Stores all remaining items in the club.
      */
