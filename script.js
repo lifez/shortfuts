@@ -337,6 +337,10 @@
         return buyNowButton;
     }
 
+    function isSearchResultPage(){
+        return document.getElementById('futHeaderTitle').innerHTML == 'Search Results'
+    }
+
     /**
      * Determiens if user is currently on the "Search Results" page.
      */
